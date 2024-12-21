@@ -1,0 +1,25 @@
+const findSmallest = <T>(collection: T[], key: keyof T): number => {
+    let min = collection[0][key]
+    let index = 0
+    for(let i = 0; i< collection.length; i++){
+        if(collection[i][key] < min){
+            min = collection[i][key]
+            index = i
+        }
+    }
+
+    return index
+}
+
+export const sortInsert = <T>(collection: T[], key: keyof T): T[] => {
+    const sortedCollection: T[] = [];
+
+    const length = collection.length
+    for(let i = 0; i < length; i++){
+        const index = findSmallest<T>(collection, key)
+        sortedCollection.push(...collection.splice(index, 1))
+    }
+
+    return sortedCollection
+
+}

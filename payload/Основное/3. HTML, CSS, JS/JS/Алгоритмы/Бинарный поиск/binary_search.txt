@@ -1,0 +1,16 @@
+export const binarySearch = <T, V>(collection: T[], key: keyof T, target: V): T | null => {
+    let from = 0;
+    let to = collection.length-1;
+
+    while(from <= to){
+        let middle = Math.floor((from + to) / 2)
+        if( target < collection[middle][key] )
+            to = middle-1
+        else if(target > collection[middle][key])
+            from = middle + 1
+        else
+            return collection[middle];
+    }
+
+    return null;
+}
