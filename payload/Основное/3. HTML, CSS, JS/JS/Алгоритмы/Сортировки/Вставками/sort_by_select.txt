@@ -1,0 +1,39 @@
+const collection = [
+	{id: 5, name: 'Dima', surname: 'Kasimov', age: 23},
+	{id: 15, name: 'Ruslan', surname: 'Kasimov', age: 20},
+	{id: 7, name: 'Chakin', surname: '-', age: 50},
+	{id: 3, name: 'Maxa', surname: 'Borow', age: 18},
+	{id: 10, name: 'Nikita', surname: 'Lyskov', age: 16},
+]
+
+// const findCornerValue = <T>(collection: T[], key: keyof T, asc: boolean): number => {
+const findCornerValue = (collection, key, asc) => {
+	let savedItem = collection[0]
+	let index = 0;
+	const length = collection.length
+	for(let i = 0; i < length; i++){
+		if(asc ? collection[i][key] < savedItem[key] : collection[i][key] > savedItem[key]){
+			savedItem = collection[i]
+			index = i
+		}
+			
+	}
+
+	return index
+}
+
+// const sortBySelect = <T>(collection: T[], key: keyof T, asc: boolean): T[] => {
+const sortBySelect = (collection, key, asc = true) => {
+console.log(asc)
+	const clonedCollection = [...collection]
+	const sortedCollection = []
+	for(let i = 0; i < collection.length; i++){
+		const index = findCornerValue(clonedCollection, key, asc)
+		sortedCollection.push(...clonedCollection.splice(index, 1))
+	}
+	return sortedCollection
+}
+// сортировать collection по возрастанию по ключу id
+console.log(sortBySelect(collection, 'id'))
+// сортировать collection по убыванию по ключу id
+console.log(sortBySelect(collection, 'id', false))
