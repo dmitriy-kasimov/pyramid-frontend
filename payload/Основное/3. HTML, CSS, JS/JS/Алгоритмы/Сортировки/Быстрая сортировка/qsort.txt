@@ -1,0 +1,11 @@
+
+export const qsort = <T>(collection: T[], key: keyof T): T[] => {
+    if(collection.length < 2) return collection
+
+    const pivot = collection[0]
+
+    const less = collection.filter(item => item[key] < pivot[key] )
+    const greater = collection.filter(item => item[key] > pivot[key] )
+
+    return [...qsort<T>(less, key), pivot, ...qsort<T>(greater, key)]
+}
